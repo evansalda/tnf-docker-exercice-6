@@ -82,7 +82,20 @@ Docker Compose se comporte ainsi afin d'éviter une perte de données accidentel
 
 - Vérifiez que tout est conforme (docker ps, docker inspect, docker volume ls, etc...)
 
-### 7. Les réseaux custom
+### 7. Le fichier de variables d'environnement
+
+- Créez un fichier nommé **db.env** et définissez-y les variables d'environnement **POSTGRES_USER, POSTGRES_PASSWORD et POSTGRES_DB** du conteneur db
+
+- Modifiez votre compose file pour que le conteneur db utilise le fichier db.env pour configurer ses variables d'environnement
+
+- Utilisez la commande **docker compose up -d** et notez que Docker Compose n'effectue aucune action. En effet, aucun paramétrage n'a réèllement changé
+
+- Modifiez la valeur de **POSTGRES_PASSWORD** dans le fichier **db.env** et re-exécutez la commande **docker compose up -d**. Notez cette fois-ci que Docker Compose recrée le conteneur
+
+- Utilisez la commande **docker inspect** pour confirmer que la valeur de **POSTGRES_PASSWORD** a changé.
+
+
+### 8. Les réseaux custom
 
 Mettez à jour votre compose file en ajoutant les réseaux front-tier et back-tier :
 

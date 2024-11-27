@@ -116,3 +116,31 @@ Mettez à jour votre compose file en ajoutant les réseaux front-tier et back-ti
 - Modifiez le conteneur **db** pour qu'il soit connecté au réseau **back-tier**
 
 - Exécutez la commande **docker compose up -d** et constatez les actions réalisées par Docker Compose
+
+### 9. Les replicas
+
+- A l'aide d'un nouveau compose file, créez les ressources suivantes :
+
+    - Réseau
+        - **Nom** - front-end
+        - **Adresse de sous-réseau** - 172.16.0.0/16
+
+    - Service
+        - **Nom** - api
+        - **Image** - httpd
+        - **Version de l'image** - 2.4.62
+        - **Réseau** - front-end
+
+- Mettez à jour le service pour qu'il contienne 10 replicas de son conteneur.
+
+- A l'aide de la commande `docker network inspect front-tier`, confirmez que les 10 replicas sont bien connectés au réseau front-tier et disposent chacun d'une adresse IP.
+
+- Mettez à jour le service pour que le port 80 de ses replicas soit bindé au port 8080 du Docker Host.
+
+- Vous obtenez normalement l'erreur **Une seule utilisation de chaque adresse de socket (protocole/adresse réseau/port) est habituellement autorisée**.
+
+- Exécutez la commande `docker ps` et notez que Docker Compose n'a pu recréer qu'un conteneur : Supprimez ce conteneur.
+
+- Mettez à jour le service pour que le port 80 de chaque replica soit bindé avec un port du Docker Host allant de 8081 à 8090.
+
+- Notez que la même erreur est obtenue : Docker Compose ne peut pas répartir les ports d'une range fournie sur les replicas d'un service.

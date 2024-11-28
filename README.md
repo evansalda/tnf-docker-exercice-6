@@ -133,7 +133,7 @@ Mettez à jour votre compose file en ajoutant les réseaux front-tier et back-ti
 
 - Mettez à jour le service pour qu'il contienne 10 replicas de son conteneur.
 
-- A l'aide de la commande `docker network inspect front-tier`, confirmez que les 10 replicas sont bien connectés au réseau front-tier et disposent chacun d'une adresse IP.
+- A l'aide de la commande `docker network inspect front-end`, confirmez que les 10 replicas sont bien connectés au réseau front-tier et disposent chacun d'une adresse IP.
 
 - Mettez à jour le service pour que le port 80 de ses replicas soit bindé au port 8080 du Docker Host.
 
